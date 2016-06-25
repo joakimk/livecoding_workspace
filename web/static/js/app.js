@@ -19,5 +19,11 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+// import socket from "./socket"
 
-document.getElementById("js-container").innerHTML = "foo"
+import { Cube } from "web/static/js/cube";
+
+// document.getElementById("js-container").innerHTML = ""
+
+var element = Cube.init()
+document.getElementById("js-container").appendChild(element)
