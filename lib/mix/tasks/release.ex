@@ -7,6 +7,9 @@ defmodule Mix.Tasks.Release do
     Mix.shell.info "Compiling assets..."
     Mix.shell.cmd("node_modules/brunch/bin/brunch build")
 
+    Mix.shell.info "Downloading three.js..."
+    three_js_code = get("http://cdnjs.cloudflare.com/ajax/libs/three.js/r57/three.min.js")
+
     code = File.read!("priv/static/js/live_update.js")
 
     page = """
@@ -16,15 +19,15 @@ defmodule Mix.Tasks.Release do
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
 
         <title>Demo</title>
       </head>
 
       <body>
     <div id="js-container" />
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r57/three.min.js"></script>
+        <script type="text/javascript">
+          #{three_js_code}
+        </script>
         <script type="text/javascript">
           #{code}
         </script>
@@ -41,5 +44,10 @@ defmodule Mix.Tasks.Release do
     Mix.shell.info "Writing release.html"
     File.write! "release.html", page
     Mix.shell.info "Done"
+  end
+
+  defp get(url) do
+    { :ok, {_, _, body} } = :httpc.request(:get, { String.to_char_list(url), [] }, [], [])
+    List.to_string(body)
   end
 end
