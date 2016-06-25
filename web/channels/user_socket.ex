@@ -2,7 +2,7 @@ defmodule LivecodingWorkspace.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", LivecodingWorkspace.RoomChannel
+  channel "hot_code_update", LivecodingWorkspace.HotCodeUpdateChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

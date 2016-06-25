@@ -1,29 +1,31 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
+let Socket = window.Phoenix.Socket
 
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
-import "phoenix_html"
+let socket = new Socket("/socket", { params: {} })
+socket.connect()
 
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+let channel = socket.channel("hot_code_update", {})
+channel.join()
 
-// import socket from "./socket"
-// import socket from "./socket"
+function loadApp() {
+  let element = Cube.init()
+  let container = document.getElementById("js-container")
+  container.innerHTML = ""
+  container.appendChild(element)
+}
 
-import { Cube } from "web/static/js/cube";
+window.liveCodeVersion = 1
 
-// document.getElementById("js-container").innerHTML = ""
+channel.on("updated_code", (data) => {
+  console.log("Hot updating code...")
 
-var element = Cube.init()
-document.getElementById("js-container").appendChild(element)
+  window.liveCodeVersion += 1
+
+  var script = document.createElement("script")
+  script.type = "text/javascript"
+  script.innerHTML = data.source
+  document.body.appendChild(script)
+
+  loadApp()
+})
+
+loadApp()

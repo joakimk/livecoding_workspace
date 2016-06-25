@@ -1,7 +1,9 @@
 exports.config =
   files:
     javascripts:
-      joinTo: "js/app.js"
+      joinTo:
+        "js/app.js": (str) -> str.indexOf("cube.coffee") == -1
+        "js/live_update.js": (str) -> str.indexOf("cube.coffee") != -1
 
     stylesheets:
       joinTo: "css/app.css"
@@ -16,6 +18,7 @@ exports.config =
 
   paths:
     watched: [
+      "deps/phoenix/priv/static"
       "web/static"
       "test/static"
     ]
@@ -26,9 +29,16 @@ exports.config =
     babel:
       ignore: [ /web\/static\/vendor/ ]
 
+  # Modules and npm config is set to not use require.js wrapping
+  # so that the simple hot code reloading works. This setup isn't meant
+  # for building big apps so should work just fine without module wrapping.
   modules:
-    autoRequire:
-      "js/app.js": [ "web/static/js/app" ]
+    wrapper: false
+    definition: false
 
   npm:
-    enabled: true
+    enabled: false
+
+  # The source map file was not available on hot-code reloading so it casued
+  # an error. I don't use source maps, so the easiest fix is to disable them.
+  sourceMaps: false

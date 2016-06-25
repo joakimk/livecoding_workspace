@@ -6,20 +6,27 @@ Cube =
     geometry = null
     material = null
     mesh = null
+    clock = null
 
-    model =
+    # This model is only used on first page load, after that you will
+    # retain the data from previous versions of the code.
+    defaultModel =
+      camera:
+        z: 1.42
+
       rotation:
         x: 0
         y: 0
 
-      timeSinceStart: 0
+    model = window.previousModelData or defaultModel
+    currentCodeVersion = window.liveCodeVersion
 
     start = ->
+      clock = new THREE.Clock()
       renderer = new THREE.CanvasRenderer()
       renderer.setSize window.innerWidth, window.innerHeight
 
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10)
-      camera.position.z = 3
 
       geometry = new THREE.CubeGeometry(1, 1, 1)
       material = new THREE.MeshBasicMaterial(
@@ -37,24 +44,29 @@ Cube =
       renderer.domElement
 
     animate = ->
+      # Stop animating if a new live updated code version has arrived
+      return if currentCodeVersion != window.liveCodeVersion
       requestAnimationFrame animate
 
       update()
       render()
 
+      window.previousModelData = model
+
     update = ->
-      #Date.now() * 0.0005;
-      #timeSinceStart += delta
-      model.rotation.x = 7
-      model.rotation.y = 10
+      delta = clock.getDelta()
+      model.rotation.x += 0.5 * delta
+      model.rotation.y -= 0.5 * delta
+      #model.camera.z += 1 * delta
+      #console.log(model.camera.z)
 
     render = ->
       mesh.rotation.x = model.rotation.x
       mesh.rotation.y = model.rotation.y
+      camera.position.z = model.camera.z
 
       renderer.render scene, camera
 
     start()
 
-module.exports =
-  Cube: Cube
+window.Cube = Cube

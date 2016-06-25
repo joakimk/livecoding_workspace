@@ -19,7 +19,9 @@ config :livecoding_workspace, LivecodingWorkspace.Endpoint,
 config :livecoding_workspace, LivecodingWorkspace.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+       # js intentionally not included here since we want to hot-reload
+       # the js code for a quicker development flow.
+      ~r{priv/static/.*(css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{web/views/.*(ex)$},
       ~r{web/templates/.*(eex)$}
