@@ -6,10 +6,6 @@ This works by using file system events, websockets and hot code reloading.
 
 ![](https://s3.amazonaws.com/f.cl.ly/items/0w1l0e2z3g3v0x172s3D/livecoding_workspace.gif?v=a98f7faa)
 
-# TODO
-
-- add export instructions
-
 # Installing
 
     mix deps.get
@@ -31,4 +27,6 @@ Now go and play around with the code :)
 
 # Exporting the final result to a HTML file
 
-TODO: instructions
+    mix release
+
+See release.html
