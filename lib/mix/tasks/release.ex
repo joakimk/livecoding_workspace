@@ -24,7 +24,7 @@ defmodule Mix.Tasks.Release do
       </head>
 
       <body>
-    <div id="js-container" />
+        <div id="js-container" />
         <script type="text/javascript">
           #{three_js_code}
         </script>
@@ -37,7 +37,7 @@ defmodule Mix.Tasks.Release do
           container = document.getElementById("js-container")
           container.appendChild(element)
         </script>
-    </body>
+      </body>
     </html>
     """
 
