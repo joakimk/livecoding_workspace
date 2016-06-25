@@ -2,6 +2,8 @@
 
 A javascript live coding (hot code reload) workspace set up using Elixir and Phoenix.
 
+Mostly set up to do WebGL using three.js.
+
 ![](https://s3.amazonaws.com/f.cl.ly/items/0w1l0e2z3g3v0x172s3D/livecoding_workspace.gif?v=a98f7faa)
 
 # Installing
