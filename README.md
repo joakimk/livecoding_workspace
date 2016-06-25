@@ -28,8 +28,8 @@ See release.html
 # How it works
 
 0. Brunch detects the file change and compiles all files matching the rule for `live_update.js` in brunch-config.coffee.
-0. Elixir detects the new `live_update.js` file using file system events
-0. We then use Phoenix web sockets to push out the new code.
-0. `app.js` disables the old version of the code and loads the new version
-0. The app continues from where it was previously by using the data in `window.previousModelData`
+0. Elixir detects the new `live_update.js` file using file system events.
+0. We use Phoenix web sockets to push out the new code.
+0. `app.js` disables the old version of the code and loads the new version.
+0. The app continues from where it was previously by using the data in `window.previousModelData`.
 
