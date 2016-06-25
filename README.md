@@ -1,6 +1,6 @@
 # Livecoding workspace
 
-A javascript live coding workspace written using Elixir and Phoenix. You can do this with pure js tools, but I like Elixir better :)
+A javascript live coding (hot code reload) workspace set up using Elixir and Phoenix.
 
 This works by using file system events, websockets and hot code reloading.
 
