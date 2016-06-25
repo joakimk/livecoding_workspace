@@ -4,7 +4,7 @@ A javascript live coding (hot code reload) workspace set up using Elixir and Pho
 
 This works by using file system events, websockets and hot code reloading.
 
-![](https://s3.amazonaws.com/f.cl.ly/items/240G3N1C1z3S1a2w3B0l/livecoding_workspace.gif?v=bab4f1c5)
+![](https://s3.amazonaws.com/f.cl.ly/items/0w1l0e2z3g3v0x172s3D/livecoding_workspace.gif?v=a98f7faa)
 
 # Installing
 
