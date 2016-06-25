@@ -12,7 +12,7 @@ Cube =
     # retain the data from previous versions of the code.
     defaultModel =
       camera:
-        z: 1.42
+        z: 2.5
 
       rotation:
         x: 0
@@ -30,9 +30,9 @@ Cube =
 
       geometry = new THREE.CubeGeometry(1, 1, 1)
       material = new THREE.MeshBasicMaterial(
-        color: 0x000000
+        color: 0x444444
         wireframe: true
-        wireframeLinewidth: 2
+        wireframeLinewidth: 20
       )
 
       mesh = new THREE.Mesh(geometry, material)
@@ -57,6 +57,7 @@ Cube =
       delta = clock.getDelta()
       model.rotation.x += 0.5 * delta
       model.rotation.y -= 0.5 * delta
+      #model.camera.z = 2.5
       #model.camera.z += 1 * delta
       #console.log(model.camera.z)
 
