@@ -14,6 +14,8 @@ config :livecoding_workspace, LivecodingWorkspace.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]]
 
+config :livecoding_workspace,
+  three_js_url: "http://cdnjs.cloudflare.com/ajax/libs/three.js/r57/three.min.js"
 
 # Watch static and templates for browser reloading.
 config :livecoding_workspace, LivecodingWorkspace.Endpoint,

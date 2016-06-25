@@ -8,7 +8,7 @@ defmodule Mix.Tasks.Release do
     Mix.shell.cmd("node_modules/brunch/bin/brunch build")
 
     Mix.shell.info "Downloading three.js..."
-    three_js_code = get("http://cdnjs.cloudflare.com/ajax/libs/three.js/r57/three.min.js")
+    three_js_code = Application.get_env(:livecoding_workspace, :three_js_url) |> get
 
     code = File.read!("priv/static/js/live_update.js")
 
