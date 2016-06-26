@@ -1,0 +1,18 @@
+<sync rows="128">
+	<tracks>
+		<track name="rotation.x">
+			<key row="0" interpolation="1" value="10"/>
+			<key row="48" interpolation="0" value="2"/>
+		</track>
+		<track name="rotation.y">
+			<key row="40" interpolation="1" value="2"/>
+			<key row="48" interpolation="0" value="3"/>
+			<key row="51" interpolation="0" value="2"/>
+			<key row="53" interpolation="0" value="4"/>
+			<key row="55" interpolation="0" value="2"/>
+			<key row="57" interpolation="0" value="4"/>
+			<key row="59" interpolation="0" value="0"/>
+		</track>
+	</tracks>
+	<bookmarks/>
+</sync>

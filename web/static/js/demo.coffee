@@ -10,6 +10,7 @@ Demo =
     material = null
     mesh = null
     clock = null
+    syncTracker = null
 
     # This model is only used on first page load, after that you will
     # retain the data from previous versions of the code.
@@ -43,7 +44,8 @@ Demo =
       scene = new THREE.Scene()
       scene.add mesh
 
-      startTracker()
+      syncTracker = new DemoSyncTracker()
+      syncTracker.start()
 
       animate()
       renderer.domElement
@@ -58,14 +60,17 @@ Demo =
         render()
       catch error
         window.previousModelData = defaultModel
+        console.log error
         window.location.reload()
 
       window.previousModelData = model
 
     update = ->
-      delta = clock.getDelta()
-      model.rotation.x += 4.5 * delta
-      model.rotation.y -= 0.5 * delta
+      data = syncTracker.update()
+
+      #delta = clock.getDelta()
+      model.rotation.x = data.rotation.x
+      model.rotation.y = data.rotation.y
       #model.camera.z = 2.5
       #model.camera.z += 1 * delta
       #console.log(model.camera.z)
@@ -76,68 +81,6 @@ Demo =
       camera.position.z = model.camera.z
 
       renderer.render scene, camera
-
-    startTracker = ->
-      BPM = 170
-      ROWS_PER_BEAT = 8
-      ROW_RATE = BPM / 60 * ROWS_PER_BEAT
-
-      syncDevice = new JSRocket.SyncDevice()
-
-      rotationX = null
-      rotationY = null
-
-      row = null
-      audio = new Audio()
-
-      syncDevice.setConfig(socketURL: "ws://127.0.0.1:1339")
-
-      onSyncReady = ->
-        rotationX = syncDevice.getTrack("rotation.x")
-        rotationY = syncDevice.getTrack("rotation.y")
-
-        audio.src = "/music/alpha_c_-_euh.ogg"
-        audio.load()
-        audio.preload = true
-
-        # When not being controller by a tracker, run this
-        #audio.addEventListener "canplay", ->
-        #  audio.play()
-
-        # TODO: make this part of the regular update cycle
-        updater = ->
-          unless audio.paused
-            row = audio.currentTime * ROW_RATE
-            syncDevice.update(row)
-
-          setTimeout updater, 100
-
-        updater()
-
-      onSyncUpdate = (newRow) ->
-        row = newRow
-
-        audio.currentTime = row / ROW_RATE
-
-        console.log rotationX: rotationX.getValue(newRow),
-                    rotationY: rotationY.getValue(newRow),
-                    row: newRow
-
-      onPlay = ->
-        console.log("PLAY")
-        audio.play()
-
-      onPause = ->
-        audio.pause()
-
-      syncDevice.init()
-
-      syncDevice.on "ready", onSyncReady
-      syncDevice.on "update", onSyncUpdate
-      syncDevice.on "play", onPlay
-      syncDevice.on "pause", onPause
-
-      window.syncDevice = syncDevice
 
     start()
 
