@@ -1,3 +1,6 @@
+# This is intended to be a example of demo using GNU rocket (https://github.com/kusma/rocket)
+# to drive the visuals to be in sync with the music.
+
 Demo =
   init: ->
     camera = null
@@ -40,6 +43,8 @@ Demo =
       scene = new THREE.Scene()
       scene.add mesh
 
+      startSync()
+
       animate()
       renderer.domElement
 
@@ -59,7 +64,7 @@ Demo =
 
     update = ->
       delta = clock.getDelta()
-      model.rotation.x += 8.5 * delta
+      model.rotation.x += 4.5 * delta
       model.rotation.y -= 0.5 * delta
       #model.camera.z = 2.5
       #model.camera.z += 1 * delta
@@ -71,6 +76,50 @@ Demo =
       camera.position.z = model.camera.z
 
       renderer.render scene, camera
+
+    # WIP: syncing with GNU rocket
+    startSync = ->
+      syncDevice = new JSRocket.SyncDevice()
+      BPM = 170
+      ROWS_PER_BEAT = 8
+      ROW_RATE = BPM / 60 * ROWS_PER_BEAT
+      awesomeness = null
+
+      color = null
+      row = null
+
+      syncDevice.setConfig(socketURL: "ws://127.0.0.1:1339")
+
+      onSyncReady = ->
+        awesomeness = syncDevice.getTrack("AmountOfAwesome")
+        color = syncDevice.getTrack("Color")
+
+      onSyncUpdate = (newRow) ->
+        row = newRow
+        console.log awesomeness: awesomeness.getValue(newRow),
+                    color: color.getValue(newRow),
+                    row: newRow
+
+        # TODO: drive rocket though current audio time
+        #row = _audio.currentTime * ROW_RATE
+        #syncDevice.update(row)
+
+      onPlay = ->
+        #set tune.currentTime here
+        console.log "[onPlay] time in seconds", row / ROW_RATE
+
+      onPause = ->
+        #pause tune
+        console.log "[onPause] time in seconds", row / ROW_RATE
+
+      syncDevice.init()
+
+      syncDevice.on "ready", onSyncReady
+      syncDevice.on "update", onSyncUpdate
+      syncDevice.on "play", onPlay
+      syncDevice.on "pause", onPause
+
+      window.syncDevice = syncDevice
 
     start()
 

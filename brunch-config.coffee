@@ -2,8 +2,9 @@ exports.config =
   files:
     javascripts:
       joinTo:
-        "js/app.js": (str) -> str.indexOf("coffee") == -1
-        "js/live_update.js": (str) -> str.indexOf("coffee") != -1
+        "js/app.js":         (str) -> str.indexOf("app.js") != -1
+        "js/deps.js":        (str) -> str.indexOf("vendor") != -1
+        "js/live_update.js": (str) -> str.indexOf("app.js") == -1 && str.indexOf("vendor") == -1
 
     stylesheets:
       joinTo: "css/app.css"
