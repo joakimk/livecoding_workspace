@@ -33,7 +33,17 @@ defmodule Mix.Tasks.Release do
         </script>
 
         <script type="text/javascript">
-          element = Cube.init()
+          function appName() {
+            let href = window.location.href
+
+            if(href.indexOf("app") == -1) {
+              return "Cube"
+            } else {
+              return href.split("app=")[1]
+            }
+          }
+
+          element = window[appName()].init()
           container = document.getElementById("js-container")
           container.appendChild(element)
         </script>

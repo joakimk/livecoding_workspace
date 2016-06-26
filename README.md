@@ -28,6 +28,14 @@ Start the server
 
 See release.html
 
+# Multiple apps
+
+As this is meant to be a workspace where you can try out various things, it supports multiple "apps".
+
+For example, try <http://localhost:4000?app=Demo> to load the code from Demo.coffee. Any top level function that in turn exposes an `init()` to return the root element can be used by this.
+
+This also works with release.html, e.g. `release.html?app=Demo` will display that app.
+
 # How it works
 
 0. Brunch detects the file change and compiles all files matching the rule for `live_update.js` in brunch-config.coffee.
