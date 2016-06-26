@@ -38,6 +38,10 @@ class @DemoSyncTracker
       if @demoMode
         @audio.addEventListener "canplay", =>
           @audio.play()
+      else
+        @audio.addEventListener "ended", =>
+          @audio.currentTime = 0
+          @audio.play()
 
     device.on "update", (row) =>
       @row = row
