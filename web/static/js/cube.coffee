@@ -48,8 +48,12 @@ Cube =
       return if currentCodeVersion != window.liveCodeVersion
       requestAnimationFrame animate
 
-      update()
-      render()
+      try
+        update()
+        render()
+      catch error
+        model = defaultModel
+        window.location.reload()
 
       window.previousModelData = model
 
