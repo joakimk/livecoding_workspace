@@ -1,4 +1,4 @@
-# This class talks to "GNU tracker", both getting the latest values
+# This class talks to "GNU rocket", both getting the latest values
 # and updating the tracker based on the current position in the music.
 class @DemoSyncTracker
   constructor: ->
