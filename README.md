@@ -20,6 +20,7 @@ Start the server
 0. Visit <http://localhost:4000>
   0. If you get a "no process" error in the console, reload the page once.
 0. Then edit [web/static/js/cube.coffee](web/static/js/cube.coffee) and see the changes appear in the browser right away.
+0. Realise that you can open the app on a secondary computer over the network (like an iPad)...
 
 # Exporting the final result to a HTML file
 
