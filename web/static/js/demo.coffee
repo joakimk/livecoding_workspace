@@ -43,7 +43,7 @@ Demo =
       scene = new THREE.Scene()
       scene.add mesh
 
-      startSync()
+      startTracker()
 
       animate()
       renderer.domElement
@@ -77,40 +77,58 @@ Demo =
 
       renderer.render scene, camera
 
-    # WIP: syncing with GNU rocket
-    startSync = ->
-      syncDevice = new JSRocket.SyncDevice()
+    startTracker = ->
       BPM = 170
       ROWS_PER_BEAT = 8
       ROW_RATE = BPM / 60 * ROWS_PER_BEAT
-      awesomeness = null
 
-      color = null
+      syncDevice = new JSRocket.SyncDevice()
+
+      rotationX = null
+      rotationY = null
+
       row = null
+      audio = new Audio()
 
       syncDevice.setConfig(socketURL: "ws://127.0.0.1:1339")
 
       onSyncReady = ->
-        awesomeness = syncDevice.getTrack("AmountOfAwesome")
-        color = syncDevice.getTrack("Color")
+        rotationX = syncDevice.getTrack("rotation.x")
+        rotationY = syncDevice.getTrack("rotation.y")
+
+        audio.src = "/music/alpha_c_-_euh.ogg"
+        audio.load()
+        audio.preload = true
+
+        # When not being controller by a tracker, run this
+        #audio.addEventListener "canplay", ->
+        #  audio.play()
+
+        # TODO: make this part of the regular update cycle
+        updater = ->
+          unless audio.paused
+            row = audio.currentTime * ROW_RATE
+            syncDevice.update(row)
+
+          setTimeout updater, 100
+
+        updater()
 
       onSyncUpdate = (newRow) ->
         row = newRow
-        console.log awesomeness: awesomeness.getValue(newRow),
-                    color: color.getValue(newRow),
+
+        audio.currentTime = row / ROW_RATE
+
+        console.log rotationX: rotationX.getValue(newRow),
+                    rotationY: rotationY.getValue(newRow),
                     row: newRow
 
-        # TODO: drive rocket though current audio time
-        #row = _audio.currentTime * ROW_RATE
-        #syncDevice.update(row)
-
       onPlay = ->
-        #set tune.currentTime here
-        console.log "[onPlay] time in seconds", row / ROW_RATE
+        console.log("PLAY")
+        audio.play()
 
       onPause = ->
-        #pause tune
-        console.log "[onPause] time in seconds", row / ROW_RATE
+        audio.pause()
 
       syncDevice.init()
 

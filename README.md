@@ -47,6 +47,10 @@ This also works with release.html, e.g. `release.html?app=Demo` will display tha
 0. The app continues from where it was previously by using the data in `window.previousModelData`.
   0. If any error occurs, the data is reset to defaults and the page is reloaded.
 
+## Credits
+
+Borrowed the example music from the javascript example of https://github.com/kusma/rocket for "Demo".
+
 ## License
 
 Copyright (c) 2016 [Joakim Kolsjö](https://twitter.com/joakimk)
