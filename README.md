@@ -38,11 +38,11 @@ For example, try <http://localhost:4000?app=Demo> to load the code from Demo.cof
 
 This also works with release.html, e.g. `release.html?app=Demo` will display that app.
 
-## Using this to create a Demo
+## Using this to create a demo
 
 [web/static/js/demo.coffee](web/static/js/demo.coffee) is a tiny demo with movement synced to music using <https://github.com/kusma/rocket/>. To see the end result, go to: <http://localhost:4000/?app=Demo>.
 
-If you have the "GNU rocket" tracker installed and started, go to <http://localhost:4000/?tracker=true&app=Demo> and the rotation tracks will appear in the editor. Press space and the demo will run. Keep in mind it won't do anything unless you enter numbers into the tracks.
+If you have the "GNU rocket" tracker installed and started, go to <http://localhost:4000/?tracker=true&app=Demo> and the rotation tracks will appear in the editor (given that you compiled it with QT5 which has websocket support). Press space and the demo will run. Keep in mind it won't do anything unless you enter numbers into the tracks.
 
 # How it works
 
