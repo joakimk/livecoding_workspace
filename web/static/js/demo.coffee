@@ -44,8 +44,12 @@ Demo =
       scene = new THREE.Scene()
       scene.add mesh
 
-      syncTracker = new DemoSyncTracker()
-      syncTracker.start()
+      # Set up syncTracker on first load so it does not break on code updates
+      unless window.syncTracker
+        syncTracker = new DemoSyncTracker()
+        syncTracker.start()
+        window.syncTracker = syncTracker
+      syncTracker = window.syncTracker
 
       animate()
       renderer.domElement
