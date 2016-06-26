@@ -52,7 +52,7 @@ Cube =
         update()
         render()
       catch error
-        model = defaultModel
+        window.previousModelData = defaultModel
         window.location.reload()
 
       window.previousModelData = model
