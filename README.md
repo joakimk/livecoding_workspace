@@ -8,6 +8,8 @@ Mostly set up to do WebGL using three.js.
 
 # Installing
 
+Before you start, ensure you have Node and Elixir installed. I'm using Elixir 1.3.0 and Node v5.5.0, but other versions will likely work as well.
+
     mix deps.get
     npm install
 
