@@ -15,7 +15,7 @@ class @DemoSyncTracker
     if @demoMode
       @syncDevice.setConfig rocketXML: "demo/demo.rocket"
     else
-      @syncDevice.setConfig socketURL: "ws://127.0.0.1:1339"
+      @syncDevice.setConfig socketURL: "ws://#{window.location.hostname}:1339"
 
     @row = "not yet set"
     @tracks = {}
