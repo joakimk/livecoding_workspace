@@ -44,6 +44,8 @@ This also works with release.html, e.g. `release.html?app=Demo` will display tha
 
 If you have the "GNU rocket" tracker installed and started, go to <http://localhost:4000/?tracker=true&app=Demo> and the rotation tracks will appear in the editor (given that you compiled it with QT5 which has websocket support). Press space and the demo will run. Keep in mind it won't do anything unless you enter numbers into the tracks.
 
+For an example of a real demo created using a version of this setup, see [xa-006](github.com/joakimk/xa-006).
+
 ## Demo music sync gotcha
 
 You may experience an issue where the player resets to the start after pausing, moving in the editor and then playing again. This is because setting "audio.currentTime" to anything in that situation causes "audio.currentTime" to return 0 (browser bug). This seems to be an issue related to streaming and can be fixed by loading the music using a data-uri ([see example](https://github.com/joakimk/xa-006/commit/27d47b13cb2b81d6460b513058513e9de55880dd)). 
