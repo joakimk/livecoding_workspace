@@ -44,7 +44,7 @@ This also works with release.html, e.g. `release.html?app=Demo` will display tha
 
 If you have the "GNU rocket" tracker installed and started, go to <http://localhost:4000/?tracker=true&app=Demo> and the rotation tracks will appear in the editor (given that you compiled it with QT5 which has websocket support). Press space and the demo will run. Keep in mind it won't do anything unless you enter numbers into the tracks.
 
-For an example of a real demo created using a version of this setup, see [xa-006](github.com/joakimk/xa-006).
+For an example of a real demo created using a version of this setup, see [xa-006](https://github.com/joakimk/xa-006).
 
 ## Demo music sync gotcha
 
