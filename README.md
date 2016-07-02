@@ -46,7 +46,7 @@ If you have the "GNU rocket" tracker installed and started, go to <http://localh
 
 ## Demo music sync gotcha
 
-You may experience an issue where the player resets to the start after pausing, moving in the editor and then playing again. This is because setting "audio.currentTime" to anything in that situation causes "audio.currentTime" to return 0 (browser bug). This seems to be an issue related to streaming and can be fixed by loading the music using a data-uri ([see example](https://github.com/joakimk/xa-006/commit/27d47b13cb2b81d6460b513058513e9de55880dd). 
+You may experience an issue where the player resets to the start after pausing, moving in the editor and then playing again. This is because setting "audio.currentTime" to anything in that situation causes "audio.currentTime" to return 0 (browser bug). This seems to be an issue related to streaming and can be fixed by loading the music using a data-uri ([see example](https://github.com/joakimk/xa-006/commit/27d47b13cb2b81d6460b513058513e9de55880dd)). 
 
 # How it works
 
