@@ -53,6 +53,11 @@ If you have the "GNU rocket" tracker installed and started, go to <http://localh
 0. The app continues from where it was previously by using the data in `window.previousModelData`.
   0. If any error occurs, the data is reset to defaults and the page is reloaded.
 
+## Projects using this as a base
+
+* <https://github.com/joakimk/xa-006>
+* know of any more? ping me
+
 ## Credits
 
 Borrowed the example music from the javascript example of https://github.com/kusma/rocket for "Demo".
